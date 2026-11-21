@@ -128,6 +128,13 @@ body {
   border-radius: var(--radius);
 }
 
+/* כפתור "הצג עוד" באמצע, מתחת לרשימה */
+.more {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
 /* קו מפריד בין קבוצות של כפתורים */
 .toolbar__divider {
   width: 1px;

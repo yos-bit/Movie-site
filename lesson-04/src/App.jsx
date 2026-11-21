@@ -7,23 +7,30 @@ import { movies } from "./data/movies.js";
 function App() {
   const [onlyAvailable, setOnlyAvailable] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState("all");
+  const [visibleCount, setVisibleCount] = useState(4);
 
-  const topRated = movies.filter((movie) => movie.rating >= 8.7);
+  const topRated = movies.filter(movie => movie.rating >= 8.7);
 
   const genres = movies
-    .map((movie) => movie.genre)
+    .map(movie => movie.genre)
     .filter((genre, index, all) => all.indexOf(genre) === index);
 
   let shownMovies = movies;
   if (onlyAvailable) {
-    shownMovies = shownMovies.filter((movie) => movie.available);
+    shownMovies = shownMovies.filter(movie => movie.available);
   }
   if (selectedGenre !== "all") {
-    shownMovies = shownMovies.filter((movie) => movie.genre === selectedGenre);
+    shownMovies = shownMovies.filter(movie => movie.genre === selectedGenre);
   }
+
+  const visibleMovies = shownMovies.slice(0, visibleCount);
 
   function toggleAvailable() {
     setOnlyAvailable(!onlyAvailable);
+  }
+
+  function showMore() {
+    setVisibleCount(visibleCount + 4);
   }
 
   return (
@@ -53,7 +60,7 @@ function App() {
           >
             הכל
           </button>
-          {genres.map((genre) => (
+          {genres.map(genre => (
             <button
               key={genre}
               className={selectedGenre === genre ? "btn btn--active" : "btn"}
@@ -66,8 +73,16 @@ function App() {
 
         <MovieList
           title={`כל הסרטים (${shownMovies.length})`}
-          movies={shownMovies}
+          movies={visibleMovies}
         />
+
+        {visibleCount < shownMovies.length && (
+          <div className="more">
+            <button className="btn" onClick={showMore}>
+              הצג עוד
+            </button>
+          </div>
+        )}
       </main>
       <Footer />
     </>
