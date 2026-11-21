@@ -108,6 +108,8 @@ body {
 /* שורה מעל רשימה: כפתורים וסינונים */
 .toolbar {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 12px;
   margin-bottom: 20px;
 }
@@ -115,4 +117,20 @@ body {
 /* רווח מעל השורה, כשהיא באה אחרי רשימה */
 .movie-list + .toolbar {
   margin-top: 48px;
+}
+
+/* הודעה כשאין סרטים */
+.movie-list__empty {
+  padding: 32px;
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+/* קו מפריד בין קבוצות של כפתורים */
+.toolbar__divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
 }
